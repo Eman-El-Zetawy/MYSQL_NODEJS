@@ -1,0 +1,38 @@
+var tabal =document.getElementById("tabal");
+var firstName =document.getElementById("first_name");
+var lastName =document.getElementById("last_name");
+var grade =document.getElementById("grade");
+var button =document.getElementById("button");
+
+var  array =[] , s=['id', 'first_name' ,'last_name' ,'grade'] ;
+button.addEventListener("click" , function(){
+fn = firstName.value ;
+ln = lastName.value;
+g =grade.value ;
+
+
+console.log(fn , ln , g );
+ fetch('http://localhost:3000/arr',{
+        method:'POST', 
+        body:JSON.stringify({
+            first_name:fn ,
+            last_name:ln,
+              gender:g
+        })
+    })
+    .then( response=>response.json())
+    .then((data) => {
+     array= data,
+      console.log(array);
+    //     for (var i = 0; i < array.length; i++) {
+    //         var l='';
+    //     tabal.innerHTML +='<tr>';
+    //      for(var j=0 ; j<s.length ; j++){
+    //          let t =s[j];
+    //        l +='<th class="th">'+array[i][t] + '</th>';
+    //      }
+    //       tabal.innerHTML += l+'</tr>';
+    //  }
+     tabal.innerHTML ='DONE';
+    });
+});
