@@ -1,0 +1,13 @@
+{
+  "name": "MYSQL_NODEJS",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Eman-El-Zetawy/MYSQL_NODEJS",
+  "author": "Eman-El-zetawy <eman.el.zetawy12@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql": "^2.17.1"
+  }
+}
