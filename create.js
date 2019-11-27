@@ -1,50 +1,21 @@
- 
  const express = require('express');
  const app = express();
  const bodyParser = require('body-parser');
  const port = 5000 ; 
- var arr =[]; 
-app.use(bodyParser.json());
-app.post("/arr", (req, res) =>{
-   
-    let todo = {
-             first_name: req.body.first_name,
-             last_name: req.body.last_name ,
-             gender: req.body.gender 
-           }
-           let s= [req.body.first_name, req.body.last_name ,req.body.gender ];
-           console.log(s);
-           console.log(todo );
-           arr.push(todo);
-           console.log(arr);
-           return res.status(201).send(todo);  
-        });
-
-
-
-
-
-
- 
  var mysql = require('mysql');
-
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "1234" ,
-  database: "st"
+  password: "root" ,
+ database: "st"
 });
-
-
-
-
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
-//   con.query("CREATE DATABASE st", function (err, result) {
-//     if (err) throw err;
-//     console.log("Database created");
-//   });
+  // con.query("CREATE DATABASE st", function (err, result) {
+  //   if (err) throw err;
+  //   console.log("Database created");
+  // });
 
 //   var sql ="CREATE TABLE student (id INT UNSIGNED NOT NULL AUTO_INCREMENT , firstName VARCHAR(255) NOT NULL , lastName VARCHAR(255) NOT NULL  , grade INT UNSIGNED , PRIMARY KEY (`id`) ) ";
 // con.query(sql, function (err, result) {
@@ -58,19 +29,77 @@ con.connect(function(err) {
 //   console.log("insert created");
 // });
 
-  var sql ="INSERT INTO student (firstName, LastName , grade ) VALUES ?";
-  var val = [['Francesco', 'Lenahan' , '78']];
-  console.log(arr);
-  con.query(sql ,[val], function (err, result) {
-  if (err) throw err;
-  console.log("insert created");
+//   var sql ="INSERT INTO student (firstName, LastName , grade ) VALUES ?";
+//   var val = [['Francesco', 'Lenahan' , '78']];
+//   console.log(arr);
+//   con.query(sql ,[val], function (err, result) {
+//   if (err) throw err;
+//   console.log("insert created");
+// });
+
+//   var sql ="SELECT * FROM student ";
+
+//   con.query(sql, function (err, result) {
+//   if (err) throw err;
+//   console.log("select created");
+  
+//   console.log('Data received from Db:\n');
+//   console.log(result);
+
+// let pagesize=5;
+// app.get('/student', (req, res) =>{
+//       let page=req.query.page;
+//    res.header("Access-Control-Allow-Origin", "*");
+//    res.header("Access-Control-Allow-Headers", "*");
+//   start=(page-1)*pagesize;
+//     end=start+ pagesize;
+//     res.send(result.slice(start,end));
+//    });
+
+// });
+
+// app.get( "/student/:id", (req, res) =>{
+//   let id=req.params.id;
+//   var sqlid ="SELECT * FROM student WHERE id="+id;
+//  res.header("Access-Control-Allow-Origin", "*");
+//  res.header("Access-Control-Allow-Headers", "*");
+//   con.query(sqlid, function (err, result) {
+//   if (err) throw err;
+//   console.log("select created\n");
+//   console.log(result);
+//  let thisId = result.find(i=>i.id==(id*1));
+//  console.log(thisId);
+//  if(thisId == undefined){
+//      res.send(id);
+//  }
+//  res.send(thisId);
+//  });
+// });
+
+app.use(bodyParser.json());
+app.post( "/student", (req, res) =>{
+    let todo = {
+          firstName : req.body.firstName,
+             lastName :  req.body.lastName ,
+            grade:  req.body.grade  
+ } ;
+      console.log(todo);
+          // var l = ['' , " '" +(req.body.firstName)+ " '", (req.body.lastName) , (req.body.gender)];
+           var sqlp ="INSERT INTO student VALUES ('13' , '" +req.body.firstName +  " ', '" +req.body.lastName +" ', '" +req.body.grade+ "') ;" ;
+
+           con.query(sqlp, function (err, result) {
+           if (err) throw err;
+          
+           console.log(result);
+
+           console.log(todo);
+          //  arr.push(todo);
+          //  console.log(arr);
+           return res.status(201).send(todo);  
+        });
+      });
+
 });
-
-
-});
-
-
-
 app.listen(port);
 
 
@@ -99,6 +128,3 @@ app.listen(port);
 //     console.log("Number of records inserted: " + result.affectedRows);
 //   });
 // });
-
-
-

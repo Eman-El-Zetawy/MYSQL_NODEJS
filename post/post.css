@@ -44,3 +44,10 @@ th{
     height: 40px;
     border: black solid 2px ;
 }
+.error{
+    width: 200px;
+    color: red;
+    padding: 20px;
+    font-size: 20px ;
+   margin: 20px;
+}
