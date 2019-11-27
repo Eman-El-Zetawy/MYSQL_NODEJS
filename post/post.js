@@ -5,29 +5,26 @@ var grade =document.getElementById("grade");
 var button =document.getElementById("button");
 var errorMassage =document.getElementById("error");
 
-var  array =[] ;
 button.addEventListener("click" , function(){
 fn = firstName.value ;
 ln = lastName.value;
 g =grade.value ;
-console.log(fn , ln , g );
  const my = new Headers();
 my.append('Content-Type', 'application/json');
  fetch('http://localhost:5000/student',{
         method:'POST',
-       //  headers : my , 
+        headers : my , 
         body:JSON.stringify({
-           first_name :fn ,
-           last_name :ln,
-              gender :g
+           firstName :fn ,
+           lastName : ln ,
+           grade :g
         })
     })
     .then( response=>response.json())
     .then((data) => {
-     array= data,
      console.log(fn , ln , g );
-      console.log(array);
-      if(array==''){
+      console.log(data);
+      if(data==''){
          errorMassage.innerHTML ='THIS IS PAGE IS EMPTY';
          errorMassage.style='background: white';
       }else{

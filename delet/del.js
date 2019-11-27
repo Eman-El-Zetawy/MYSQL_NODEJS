@@ -5,7 +5,7 @@ var errorMassage =document.getElementById("error");
 button.addEventListener("click" , function(){
  let id = inputid.value ;
 console.log(id);
-fetch('http://localhost:200/arr/'+ id ,{
+fetch('http://localhost:5000/student/'+ id ,{
         method:'DELETE', 
     })
     .then( res =>
